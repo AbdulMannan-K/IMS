@@ -89,6 +89,7 @@ function ItemForm(props) {
                 <Button
                     type="submit"
                     text="Submit"
+                    onClick={handleSubmit}
                     styles={{margin:"5px"}}
                 />
                 <Button

@@ -43,12 +43,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const useStyles2 = makeStyles(theme => ({
-    root: {
-        '& .MuiFormControl-root': {
-            width: '80%',
-            margin: theme.spacing(1)
-        }
-    }
+    // root: {
+    //     '& .MuiFormControl-root': {
+    //         width: '80%',
+    //         margin: theme.spacing(1)
+    //     }
+    // }
 }))
 
 const allItemsHeadCells = [
