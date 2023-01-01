@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ItemForm from "./ItemForm";
-import { Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@mui/material';
+import {Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment} from '@mui/material';
 import {makeStyles} from '@material-ui/core'
 import useTable from "../../components/useTable";
 import * as itemService from "../../service/itemService";
@@ -12,6 +12,16 @@ import Input from "../../components/controls/Input";
 import Button from "../../components/controls/Button";
 import ActionButton from "../../components/controls/ActionButton";
 import Popup from "../../components/Popup";
+import {styled} from "@mui/material/styles";
+
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:hover': {
+        backgroundColor: "#F4F5FD",
+        cursor: 'pointer',
+    },
+}));
+
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -140,7 +150,7 @@ export default function Items() {
                         <TableBody>
                             {
                                 recordsAfterPagingAndSorting().map(item =>
-                                    (<TableRow key={item.id}>
+                                    (<StyledTableRow key={item.id}>
                                         <TableCell>{item.id}</TableCell>
                                         <TableCell>{item.name}</TableCell>
                                         <TableCell>{item.category}</TableCell>
@@ -165,7 +175,7 @@ export default function Items() {
                                                 <CloseIcon fontSize="small"/>
                                             </ActionButton>
                                         </TableCell>
-                                    </TableRow>)
+                                    </StyledTableRow>)
                                 )
                             }
                         </TableBody>

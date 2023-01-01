@@ -1,27 +1,20 @@
 import React, { useState } from 'react'
-import { Table, TableHead, TableRow, TableCell, makeStyles, TablePagination, TableSortLabel } from '@material-ui/core'
+import {Table, TableHead, TableRow, TableCell, TablePagination, TableSortLabel, tableCellClasses} from '@mui/material'
+import { makeStyles } from '@material-ui/core'
+import { styled } from '@mui/material/styles'
 
-const useStyles = makeStyles(theme => ({
-    table: {
-        marginTop: theme.spacing(3),
-        '& thead th': {
-            fontWeight: '600',
-            color: theme.palette.primary.main,
-            backgroundColor: theme.palette.primary.light,
-        },
-        '& tbody td': {
-            fontWeight: '300',
-        },
-        '& tbody tr:hover': {
-            backgroundColor: "#F4F5FD",
-            cursor: 'pointer',
-        },
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.primary.main,
     },
-}))
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
 
 export default function useTable(records, headCells,filterFn) {
 
-    const classes = useStyles();
 
     const pages = [5, 10, 25]
     const [page, setPage] = useState(0)
@@ -30,7 +23,7 @@ export default function useTable(records, headCells,filterFn) {
     const [orderBy, setOrderBy] = useState()
 
     const TblContainer = props => (
-        <Table className={classes.table}>
+        <Table sx={{marginTop:'15px'}}>
             {props.children}
         </Table>
     )
@@ -47,7 +40,7 @@ export default function useTable(records, headCells,filterFn) {
             <TableRow>
                 {
                     headCells.map(headCell => (
-                        <TableCell key={headCell.id}
+                        <StyledTableCell key={headCell.id}
                                    sortDirection={orderBy === headCell.id ? order : false}>
                             {headCell.disableSorting ? headCell.label :
                                 <TableSortLabel
@@ -57,7 +50,7 @@ export default function useTable(records, headCells,filterFn) {
                                     {headCell.label}
                                 </TableSortLabel>
                             }
-                        </TableCell>))
+                        </StyledTableCell>))
                 }
             </TableRow>
         </TableHead>)
@@ -78,8 +71,8 @@ export default function useTable(records, headCells,filterFn) {
         rowsPerPageOptions={pages}
         rowsPerPage={rowsPerPage}
         count={records.length}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        onPageChange={handleChangePage}
     />)
 
     function stableSort(array, comparator) {
