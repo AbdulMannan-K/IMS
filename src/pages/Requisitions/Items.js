@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import { useForm, Form } from '../../components/useForm';
-import * as employeeService from "../../service/employeeService";
-import * as requisitionService from "../../service/requisitionService";
 import * as itemService from "../../service/itemService";
-
 import useTable from '../../components/useTable';
-import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
-
-
+import { Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@mui/material';
 import Controls from "../../components/controls/Controls";
 import { Search } from "@material-ui/icons";
-import AddIcon from '@material-ui/icons/Add';
-
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 import Popup from '../../components/Popup';
-import Notification from '../../components/Notification';
 
 
 
@@ -28,28 +20,11 @@ const initialFValues = {
     issuedByName: '', issuedDate: new Date()
 }
 
-const useStyles = makeStyles(theme => ({
-    pageContent: {
-        margin: theme.spacing(5),
-        padding: theme.spacing(3)
-    },
+const styles = {
     searchInput: {
-        width: '75%'
+        width: '100%'
     },
-    newButton: {
-        position: 'absolute',
-        right: '10px'
-    }
-}))
-
-const useStyles2 = makeStyles(theme => ({
-    // root: {
-    //     '& .MuiFormControl-root': {
-    //         width: '80%',
-    //         margin: theme.spacing(1)
-    //     }
-    // }
-}))
+}
 
 const allItemsHeadCells = [
     { id: 'name', label: 'Name' },
@@ -60,8 +35,8 @@ const allItemsHeadCells = [
 
 
 export default function Items(props) {
-    const classes = useStyles()
-    const formClasses=useStyles2()
+    // const classes = useStyles()
+    const classes = styles;
     const [allItems, setAllItems] = React.useState(itemService.getItems())
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
     const validate = (fieldValues = values) => {
@@ -125,7 +100,7 @@ export default function Items(props) {
                 title="Add Item to Requisition"
                 setOpenPopup={setOpenItemPopup}
             >
-                <Form onSubmit={handleItemSubmit} className={formClasses.root}>
+                <Form onSubmit={handleItemSubmit}>
                     <Grid container>
                         <Grid item xs={12}>
                             <Controls.Input
@@ -147,7 +122,8 @@ export default function Items(props) {
                             <br/>
                             <Controls.Button
                                 type="submit"
-                                text="Submit" 
+                                text="Submit"
+                                onClick={handleItemSubmit}
                             />
                         </Grid>
                     </Grid>
@@ -157,7 +133,7 @@ export default function Items(props) {
             </Popup>
                 <Toolbar>
                     <Controls.Input
-                        className={classes.searchInput}
+                        sx={classes.searchInput}
                         label="Search"
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">

@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import { useForm, Form } from '../../components/useForm';
 import * as requisitionService from "../../service/requisitionService";
-import * as itemService from "../../service/itemService";
 
 import useTable from '../../components/useTable';
-import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
-
+import { Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@mui/material';
 
 import Controls from "../../components/controls/Controls";
 import { EditOutlined, Search } from "@material-ui/icons";
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 
-import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 import Items from './Items';
 import Notification from '../../components/Notification';
 import Popup from '../../components/Popup';
@@ -30,19 +27,20 @@ const initialFValues = {
     issuedByName: '', issuedDate: new Date()
 }
 
-const useStyles = makeStyles(theme => ({
+const styles = {
     pageContent: {
-        margin: theme.spacing(5),
-        padding: theme.spacing(3)
+        margin: (theme)=> theme.spacing(5),
+        padding: (theme)=> theme.spacing(3)
     },
     searchInput: {
-        width: '75%'
+        width: '100%'
     },
-    newButton: {
-        position: 'absolute',
-        right: '10px'
+    toolBar: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent:"space-between",
     }
-}))
+}
 
 const addedItemsHeadCells = [
     { id: 'name', label: 'Name' },
@@ -53,7 +51,8 @@ const addedItemsHeadCells = [
 
 
 export default function RequisitionForm(props) {
-    const classes = useStyles()
+    // const classes = useStyles()
+    const classes = styles;
 
     const { addOrEdit, recordForEdit } = props;
     const [addedItems, setAddedItems] = React.useState([])
@@ -226,9 +225,9 @@ export default function RequisitionForm(props) {
                         addItemToRequisition={addItemToRequisition}
                     />
                 </Popup>
-                <Toolbar>
+                <div style={classes.toolBar}>
                     <Controls.Input
-                        className={classes.searchInput}
+                        sx={classes.searchInput}
                         label="Search"
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">
@@ -238,13 +237,13 @@ export default function RequisitionForm(props) {
                         onChange={handleSearch}
                     />
                     <Controls.Button
-                        className={classes.newButton}
+                        sx={classes.newButton}
                         text="Add Items"
                         variant="contained"
                         startIcon={<AddIcon />}
                         onClick={() => { setOpenPopup(true) }}
                     />
-                </Toolbar>
+                </div>
                 <TblContainer>
                     <TblHead />
                     <TableBody>

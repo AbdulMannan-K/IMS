@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import ItemForm from "./ItemForm";
 import {Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment} from '@mui/material';
-import {makeStyles} from '@material-ui/core'
 import useTable from "../../components/useTable";
 import * as itemService from "../../service/itemService";
 import { Search } from "@mui/icons-material";
@@ -22,11 +21,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-
-const useStyles = makeStyles(theme => ({
+const styles = {
     pageContent: {
-        margin: theme.spacing(5),
-        padding: theme.spacing(3)
+        margin: (theme)=> theme.spacing(5),
+        padding: (theme)=> theme.spacing(3)
     },
     searchInput: {
         width: '75%'
@@ -34,10 +32,9 @@ const useStyles = makeStyles(theme => ({
     toolBar: {
         display: "flex",
         alignItems: "center",
-        justifyContent:"space-around",
+        justifyContent:"space-between",
     }
-}))
-
+}
 
 const headCells = [
     { id: 'id', label: 'Id' },
@@ -50,7 +47,7 @@ const headCells = [
 
 export default function Items() {
 
-    const classes = useStyles();
+    const classes = styles;
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState(itemService.getItems())
     const [filterFn, setFilterFn] = useState({
@@ -125,8 +122,8 @@ export default function Items() {
                 {/*    icon={<PeopleOutlineTwoToneIcon fontSize="large" />}*/}
                 {/*/>*/}
                 {/*<ItemForm addItem={addOrEdit}/>*/}
-                <Paper className={classes.pageContent}>
-                    <div className={classes.toolBar}>
+                <Paper sx={classes.pageContent}>
+                    <div style={classes.toolBar}>
                         <Input
                             label="Search Employees"
                             InputProps={{
@@ -134,14 +131,13 @@ export default function Items() {
                                     <Search/>
                                 </InputAdornment>)
                             }}
-                            className={classes.searchInput}
+                            sx={classes.searchInput}
                             onChange={handleSearch}
                         />
                         <Button
                             text="Add New"
                             variant="outlined"
                             startIcon={<AddIcon/>}
-                            className={classes.newButton}
                             onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
                         />
                     </div>

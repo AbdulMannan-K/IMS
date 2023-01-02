@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
 import RequisitionForm from "./RequisitionForm";
-import PageHeader from "../../components/PageHeader";
-import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
-import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import { Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@mui/material';
 import useTable from "../../components/useTable";
 import * as requisitionService from "../../service/requisitionService";
-
-
 import Controls from "../../components/controls/Controls";
 import { EditOutlined, Search } from "@material-ui/icons";
 import AddIcon from '@material-ui/icons/Add';
@@ -14,8 +10,6 @@ import Popup from '../../components/Popup';
 import CloseIcon from '@material-ui/icons/Close';
 import Notification from '../../components/Notification';
 import ConfirmDialog from '../../components/ConfirmDialog';
-
-
 
 
 
@@ -27,22 +21,24 @@ const headCells = [
 
 ]
 
-const useStyles = makeStyles(theme => ({
+const styles = {
   pageContent: {
-    margin: theme.spacing(5),
-    padding: theme.spacing(3)
+    margin: (theme)=> theme.spacing(5),
+    padding: (theme)=> theme.spacing(3)
   },
   searchInput: {
     width: '75%'
   },
-  newButton: {
-    position: 'absolute',
-    right: '10px'
+  toolBar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent:"space-between",
   }
-}))
+}
 
 export default function Requisitions() {
-  const classes = useStyles()
+  // const classes = useStyles()
+  const classes = styles;
   const [records, setRecords] = React.useState(requisitionService.getAllRequisitions())
   const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
   const [openPopup, setOpenPopup] = useState(false)
@@ -105,13 +101,15 @@ export default function Requisitions() {
     setRecordForEdit(requisitionForm)
     setOpenPopup(true)
   }
+  
+  
   return (
     <div>
-      <Paper className={classes.pageContent}>
+      <Paper sx={classes.pageContent}>
         {/* <RequisitionForm /> */}
-        <Toolbar>
+        <div style={classes.toolBar}>
           <Controls.Input
-            className={classes.searchInput}
+            sx={classes.searchInput}
             label="Search"
             InputProps={{
               startAdornment: (<InputAdornment position="start">
@@ -121,13 +119,12 @@ export default function Requisitions() {
             onChange={handleSearch}
           />
           <Controls.Button
-            className={classes.newButton}
             text="Add New"
             variant="outlined"
             startIcon={<AddIcon />}
             onClick={() => { setOpenPopup(true); setRecordForEdit(null) }}
           />
-        </Toolbar>
+        </div>
 
         <TblContainer>
           <TblHead />

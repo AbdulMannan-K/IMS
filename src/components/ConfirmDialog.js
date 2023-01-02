@@ -3,6 +3,22 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyl
 import Controls from "./controls/Controls";
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 
+const styles = {
+    dialog: {
+        padding: (theme) => theme.spacing(2),
+        position: 'absolute',
+        top: (theme) => theme.spacing(5)
+    },
+    dialogTitle: {
+        textAlign: 'center'
+    },
+    dialogContent: {
+        textAlign: 'center'
+    },
+    dialogAction: {
+        justifyContent: 'center'
+    },
+}
 
 const useStyles = makeStyles(theme => ({
     dialog: {
@@ -19,32 +35,16 @@ const useStyles = makeStyles(theme => ({
     dialogAction: {
         justifyContent: 'center'
     },
-    titleIcon: {
-        backgroundColor: theme.palette.secondary.light,
-        color: theme.palette.secondary.main,
-        '&:hover': {
-            backgroundColor: theme.palette.secondary.light,
-            cursor: 'default'
-        },
-        '& .MuiSvgIcon-root': {
-            fontSize: '8rem',
-        }
-    }
 }))
 
 export default function ConfirmDialog(props) {
 
     const { confirmDialog, setConfirmDialog } = props;
-    const classes = useStyles()
+    const classes = styles;
 
     return (
-        <Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
-            <DialogTitle className={classes.dialogTitle}>
-                <IconButton disableRipple className={classes.titleIcon}>
-                    <NotListedLocationIcon />
-                </IconButton>
-            </DialogTitle>
-            <DialogContent className={classes.dialogContent}>
+        <Dialog open={confirmDialog.isOpen} sx={ classes.dialog }>
+            <DialogContent sx={classes.dialogContent}>
                 <Typography variant="h6">
                     {confirmDialog.title}
                 </Typography>
@@ -52,7 +52,7 @@ export default function ConfirmDialog(props) {
                     {confirmDialog.subTitle}
                 </Typography>
             </DialogContent>
-            <DialogActions className={classes.dialogAction}>
+            <DialogActions sx={classes.dialogAction}>
                 <Controls.Button
                     text="No"
                     color="default"

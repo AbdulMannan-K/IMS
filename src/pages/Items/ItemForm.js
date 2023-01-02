@@ -4,7 +4,7 @@ import {Form, useForm} from "../../components/useForm";
 import Select from "../../components/controls/Select";
 import Button from "../../components/controls/Button";
 import * as service from "../../service/itemService";
-import {Grid} from "@material-ui/core";
+import {Grid} from "@mui/material";
 
 const initialValues = {
     id:0,

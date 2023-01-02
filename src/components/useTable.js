@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {Table, TableHead, TableRow, TableCell, TablePagination, TableSortLabel, tableCellClasses} from '@mui/material'
-import { makeStyles } from '@material-ui/core'
 import { styled } from '@mui/material/styles'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -23,7 +22,7 @@ export default function useTable(records, headCells,filterFn) {
     const [orderBy, setOrderBy] = useState()
 
     const TblContainer = props => (
-        <Table sx={{marginTop:'15px'}}>
+        <Table sx={{marginTop: (theme) => theme.spacing(1)}}>
             {props.children}
         </Table>
     )

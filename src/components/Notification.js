@@ -1,17 +1,10 @@
 import React from 'react'
-import { Snackbar, makeStyles } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        top: theme.spacing(9)
-    }
-}))
+import { Snackbar } from '@mui/material';
+import { Alert } from '@mui/material';
 
 export default function Notification(props) {
 
     const { notify, setNotify } = props;
-    const classes = useStyles()
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -25,7 +18,7 @@ export default function Notification(props) {
 
     return (
         <Snackbar
-            className={classes.root}
+            style={{top:72}}
             open={notify.isOpen}
             autoHideDuration={3000}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
