@@ -1,6 +1,7 @@
 import React from 'react'
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+import {LocalizationProvider, DatePicker as DP} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import TextField from "@mui/material/TextField";
 
 export default function DatePicker(props) {
 
@@ -14,15 +15,15 @@ export default function DatePicker(props) {
     })
 
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker disableToolbar variant="inline" inputVariant="outlined"
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DP
                 label={label}
-                format="MMM/dd/yyyy"
+                renderInput={(props) => <TextField {...props} />}
                 name={name}
                 value={value}
                 onChange={date =>onChange(convertToDefEventPara(name,date))}
 
             />
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
     )
 }

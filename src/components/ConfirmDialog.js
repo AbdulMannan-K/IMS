@@ -1,7 +1,6 @@
 import React from 'react'
-import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyles, IconButton } from '@material-ui/core'
+import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, IconButton } from '@mui/material'
 import Controls from "./controls/Controls";
-import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 
 const styles = {
     dialog: {
@@ -19,23 +18,6 @@ const styles = {
         justifyContent: 'center'
     },
 }
-
-const useStyles = makeStyles(theme => ({
-    dialog: {
-        padding: theme.spacing(2),
-        position: 'absolute',
-        top: theme.spacing(5)
-    },
-    dialogTitle: {
-        textAlign: 'center'
-    },
-    dialogContent: {
-        textAlign: 'center'
-    },
-    dialogAction: {
-        justifyContent: 'center'
-    },
-}))
 
 export default function ConfirmDialog(props) {
 

@@ -4,10 +4,10 @@ import { Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '
 import useTable from "../../components/useTable";
 import * as requisitionService from "../../service/requisitionService";
 import Controls from "../../components/controls/Controls";
-import { EditOutlined, Search } from "@material-ui/icons";
-import AddIcon from '@material-ui/icons/Add';
+import { EditOutlined, Search } from "@mui/icons-material";
+import AddIcon from '@mui/icons-material/Add';
 import Popup from '../../components/Popup';
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 import Notification from '../../components/Notification';
 import ConfirmDialog from '../../components/ConfirmDialog';
 

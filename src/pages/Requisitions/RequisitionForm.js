@@ -7,9 +7,9 @@ import useTable from '../../components/useTable';
 import { Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@mui/material';
 
 import Controls from "../../components/controls/Controls";
-import { EditOutlined, Search } from "@material-ui/icons";
-import AddIcon from '@material-ui/icons/Add';
-import CloseIcon from '@material-ui/icons/Close';
+import { EditOutlined, Search } from "@mui/icons-material";
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
 
 import Items from './Items';
 import Notification from '../../components/Notification';

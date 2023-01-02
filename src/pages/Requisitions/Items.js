@@ -5,8 +5,8 @@ import * as itemService from "../../service/itemService";
 import useTable from '../../components/useTable';
 import { Paper, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@mui/material';
 import Controls from "../../components/controls/Controls";
-import { Search } from "@material-ui/icons";
-import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
+import { Search } from "@mui/icons-material";
+import {default as SendOutlinedIcon} from '@mui/icons-material/SendOutlined';
 import Popup from '../../components/Popup';
 
 
